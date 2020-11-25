@@ -1,5 +1,16 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/expense-tracker')
+const db = mongoose.connection
+
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected')
+})
 
 const app = express()
 const port = 3000
