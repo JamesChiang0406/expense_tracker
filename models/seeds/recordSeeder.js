@@ -15,4 +15,5 @@ db.once('open', () => {
   expenseList.forEach(item => {
     Expense.create(item)
   })
+  console.log('done!')
 })

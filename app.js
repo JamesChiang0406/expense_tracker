@@ -1,7 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const Expense = require('./models/expense')
-const Category = require('./models/category')
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -23,12 +22,10 @@ app.set('view engine', 'handlebars')
 app.get('/', (req, res) => {
   Expense.find()
     .lean()
-    .then(item => {
-      Category.find()
-        .lean()
-        .then(type => {
-
-        })
+    .then(items => {
+      let totalAmount = 0
+      items.forEach(spend => totalAmount += spend.amount)
+      res.render('index', { items, totalAmount })
     })
     .catch(error => console.log(error))
 })

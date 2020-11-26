@@ -20,4 +20,5 @@ db.once('open', () => {
     )
   })
   Promise.all(promises).then(() => db.close())
+  console.log('done!')
 })
