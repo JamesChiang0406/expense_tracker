@@ -2,7 +2,7 @@ const Category = require('../category')
 const expenseCategory = require('./category.json')
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost/expense_category', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
 
@@ -12,12 +12,12 @@ db.on('error', () => {
 
 db.once('open', () => {
   console.log('mongodb connected!')
+  const promises = []
 
-  for (let i = 0; i < expenseCategory.length; i++) {
-    Category.create({
-      name: expenseCategory[i].name,
-      icon: expenseCategory[i].icon
-    })
-  }
-}
-)
+  expenseCategory.forEach(item => {
+    promises.push(
+      Category.create(item)
+    )
+  })
+  Promise.all(promises).then(() => db.close())
+})
