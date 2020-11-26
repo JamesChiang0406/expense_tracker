@@ -1,27 +1,25 @@
 <div class="container d-flex flex-column align-items-start" style="margin-left: 400px;">
-  <div class="d-flex align-items-center">
-    <div class="dropdown mt-5">
-      <button class="btn btn-transparent dropdown-toggle d-flex align-items-center justify-content-between border-dark"
-        type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-        style="width: 350px;">
+  <div class="d-flex align-items-center justify-content-center mt-4">
+    <div class="dropdown" style="width: 250px;">
+      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         類別
       </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 350px;">
-        <a class="dropdown-item" href="#">家居物業</a>
-        <a class="dropdown-item" href="#">交通出行</a>
-        <a class="dropdown-item" href="#">休閒娛樂</a>
-        <a class="dropdown-item" href="#">餐飲食品</a>
-        <a class="dropdown-item" href="#">其他</a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {{#each categories}}
+        <a class="dropdown-item" href="/filter/{{this}}">{{this}}</a>
+        {{/each}}
       </div>
     </div>
 
-    <div>
-      <a href="/new" class="btn btn-lg active text-white border-dark mt-5" role="button" aria-pressed="true"
+
+    <div class="d-flex align-items-center justify-content-center">
+      <a href="/new" class="btn btn-sm active text-white border-dark" role="button" aria-pressed="true"
         style="width: 200px;background-color: coral; font-size: 20px; margin-left: 100px;">新增支出</a>
     </div>
   </div>
 
-  <div class="totalAmount d-flex mt-4">
+  <div class="totalAmount d-flex mt-4" style="width: 550px;">
     <span>總金額：</span>
 
     <h1 class="ml-3 mt-2" style="color:lightsalmon; font-size: 90px;">{{totalAmount}}</h1>

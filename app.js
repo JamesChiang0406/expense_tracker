@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const Expense = require('./models/expense')
 const Category = require('./models/category')
 const mongoose = require('mongoose')
-const category = require('./models/category')
 mongoose.connect('mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 
@@ -24,12 +23,14 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
+  const categories = ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他']
+
   Expense.find()
     .lean()
     .then(items => {
       let totalAmount = 0
       items.forEach(spend => totalAmount += spend.amount)
-      res.render('index', { items, totalAmount })
+      res.render('index', { items, totalAmount, categories })
     })
     .catch(error => console.log(error))
 })
@@ -104,6 +105,21 @@ app.post('/:id/delete', (req, res) => {
     })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
+})
+
+app.get('/filter/:position', (req, res) => {
+  const position = req.params.position
+  Expense.find()
+    .lean()
+    .then(spends => {
+      return spends.filter(spend => spend.category === position)
+    })
+    .then(items => {
+      let totalAmount = 0
+      items.forEach(spend => totalAmount += spend.amount)
+      const categories = ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他']
+      res.render('index', { items, totalAmount, categories })
+    })
 })
 
 app.listen(port, () => {
