@@ -1,0 +1,26 @@
+<div class="container d-flex flex-column align-items-center ">
+  <div class="outcome d-flex justify-content-between align-items-center my-3 p-2 rounded bg-danger">
+    <div class="d-flex justify-content-between align-items-center" style="width: 330px;">
+      <div class="d-flex align-items-center">
+        <i class="{{spend.icon}} mr-2" style="font-size: 25px; color: rgb(176, 202, 250);"></i>
+
+        <div class="d-flex flex-column text-white">
+          <small style="font-size: 5mm;">{{spend.name}}</small>
+          <small class="text-white" style="font-size: 1mm;">{{spend.date}}</small>
+        </div>
+      </div>
+
+      <span class="price text-white">{{spend.amount}}</span>
+    </div>
+  </div>
+
+  <span class="my-3">
+    <h1>確定刪除此支出嗎？</h1>
+  </span>
+
+  <form action="/{{id}}/delete" method="POST">
+    <button class="btn btn-danger" type="submit" name="answer" value="delete">刪除</button>
+    <button class="btn text-white" type="submit" name="answer" style="background-color: steelblue;"
+      value="/">返回</button>
+  </form>
+</div>

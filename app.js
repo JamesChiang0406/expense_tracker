@@ -59,7 +59,7 @@ app.get('/:id/edit', (req, res) => {
   res.render('edit', { id })
 })
 
-app.post('/:id/edit', (req, res) => {
+app.post('/:id', (req, res) => {
   const id = req.params.id
   const data = Object.assign(req.body)
 
@@ -83,6 +83,27 @@ app.post('/:id/edit', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 
+})
+
+app.get('/:id/delete', (req, res) => {
+  const id = req.params.id
+  Expense.findById(id)
+    .lean()
+    .then(spend => res.render('delete', { id, spend }))
+
+})
+
+app.post('/:id/delete', (req, res) => {
+  const option = req.body.answer
+  const id = req.params.id
+  Expense.findById(id)
+    .then(item => {
+      if (option === "delete") {
+        item.remove()
+      }
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.listen(port, () => {
