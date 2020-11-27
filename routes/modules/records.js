@@ -75,10 +75,10 @@ router.delete('/:id', (req, res) => {
   Record.findById(id)
     .then(item => {
       if (option === "delete") {
-        item.remove()
+        return item.remove()
       }
     })
-    .then(() => res.redirect('/'))
+    .then(() => { res.redirect('/') })
     .catch(error => console.log(error))
 })
 
