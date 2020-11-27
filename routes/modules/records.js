@@ -9,7 +9,7 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
-  let data = req.body
+  let data = Object.assign(req.body)
 
   Category.find()
     .lean()
