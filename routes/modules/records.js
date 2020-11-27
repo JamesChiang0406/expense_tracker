@@ -1,4 +1,5 @@
 const express = require('express')
+const category = require('../../models/category')
 const router = express.Router()
 const Category = require('../../models/category')
 const Record = require('../../models/Record')
@@ -12,12 +13,12 @@ router.post('/new', (req, res) => {
 
   Category.find()
     .lean()
-    .then(type => {
-      return type.find(item => item.name === data.category).icon
+    .then(categories => {
+      return categories.find(item => item.name === data.category)
     })
-    .then(type => {
+    .then(categoryicon => {
       if (data.answer === 'add') {
-        data.icon = type
+        data.icon = categoryicon.icon
         return Record.create(data)
       }
     })
