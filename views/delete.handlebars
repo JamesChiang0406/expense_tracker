@@ -18,7 +18,7 @@
     <h1>確定刪除此支出嗎？</h1>
   </span>
 
-  <form action="/{{id}}/delete" method="POST">
+  <form action="/records/{{id}}?_method=DELETE" method="POST">
     <button class="btn btn-danger" type="submit" name="answer" value="delete">刪除</button>
     <button class="btn text-white" type="submit" name="answer" style="background-color: steelblue;"
       value="/">返回</button>
