@@ -4,31 +4,37 @@
   <form action="/{{id}}" method="POST">
     <div class="form-group d-flex justify-content-between my-4" style="width: 300px;">
       <label for="formGroupExampleInput">名稱：</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" name="name" style="width: 200px;" required>
+      <input type="text" class="form-control" id="formGroupExampleInput" name="name" value="{{spend.name}}"
+        style="width: 200px;" required>
     </div>
 
     <div class="form-group d-flex justify-content-between my-4" style="width: 300px;">
       <label for="formGroupExampleInput2">日期：</label>
-      <input type="date" class="form-control" id="formGroupExampleInput2" name="date" style="width: 200px;" required>
+      <input type="date" class="form-control" id="formGroupExampleInput2" name="date" value="{{spend.date}}"
+        style="width: 200px;" required>
     </div>
 
     <div class="form-group d-flex justify-content-between my-4" style="width: 300px;">
       <label for="exampleFormControlSelect1">類別：</label>
       <select class="form-control" id="exampleFormControlSelect1" name="category" style="width: 200px;" required>
-        <option value="家居物業">家居物業</option>
-        <option value="交通出行">交通出行</option>
-        <option value="休閒娛樂">休閒娛樂</option>
-        <option value="餐飲食品">餐飲食品</option>
-        <option value="其他">其他</option>
+        <option>{{spend.category}}</option>
+        <option>家居物業</option>
+        <option>交通出行</option>
+        <option>休閒娛樂</option>
+        <option>餐飲食品</option>
+        <option>其他</option>
       </select>
     </div>
 
     <div class="form-group d-flex justify-content-between my-4" style="width: 300px;">
       <label for="formGroupExampleInput">金額：</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" name="amount" style="width: 200px;" required>
+      <input type="text" class="form-control" id="formGroupExampleInput" name="amount" value="{{spend.amount}}"
+        style="width: 200px;" required>
     </div>
 
-    <button class="btn btn-lg active text-white border-dark mt-3" type="submit"
-      style="width: 200px;background-color: coral; font-size: 20px; margin-left: 100px;">新增</button>
+    <button class="btn active text-white border-dark mt-3" type="submit" name="answer" value="add"
+      style="width: 100px;background-color: rgb(240, 65, 65); font-size: 20px; margin-left: 100px;">修改</button>
+    <button class="btn active text-white border-dark mt-3 ml-1" type="submit" name="answer" value="/"
+      style="width: 100px;background-color: rgba(33, 185, 2, 0.733); font-size: 20px;">返回</button>
   </form>
 </div>

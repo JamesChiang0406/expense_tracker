@@ -48,16 +48,22 @@ app.post('/new', (req, res) => {
       return type.find(item => item.name === data.category).icon
     })
     .then(type => {
-      data.icon = type
-      return Expense.create(data)
+      if (data.answer === 'add') {
+        data.icon = type
+        return Expense.create(data)
+      }
     })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
+
 })
 
 app.get('/:id/edit', (req, res) => {
   const id = req.params.id
-  res.render('edit', { id })
+  Expense.findById(id)
+    .lean()
+    .then(spend => res.render('edit', { id, spend }))
+    .catch(error => console.log(error))
 })
 
 app.post('/:id', (req, res) => {
@@ -69,21 +75,22 @@ app.post('/:id', (req, res) => {
       return type.find(item => item.name === data.category).icon
     })
     .then(type => {
-      data.icon = type
-      return Expense.findById(id)
-        .then(spend => {
-          spend.name = data.name
-          spend.category = data.category
-          spend.date = data.date
-          spend.category = data.category
-          spend.amount = data.amount
-          spend.icon = data.icon
-          return spend.save()
-        })
+      if (data.answer === 'add') {
+        data.icon = type
+        return Expense.findById(id)
+          .then(spend => {
+            spend.name = data.name
+            spend.category = data.category
+            spend.date = data.date
+            spend.category = data.category
+            spend.amount = data.amount
+            spend.icon = data.icon
+            return spend.save()
+          })
+      }
     })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
-
 })
 
 app.get('/:id/delete', (req, res) => {
@@ -91,7 +98,7 @@ app.get('/:id/delete', (req, res) => {
   Expense.findById(id)
     .lean()
     .then(spend => res.render('delete', { id, spend }))
-
+    .catch(error => console.log(error))
 })
 
 app.post('/:id/delete', (req, res) => {
@@ -120,6 +127,7 @@ app.get('/filter/:position', (req, res) => {
       const categories = ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他']
       res.render('index', { items, totalAmount, categories })
     })
+    .catch(error => console.log(error))
 })
 
 app.listen(port, () => {
