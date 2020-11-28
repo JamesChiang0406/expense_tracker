@@ -1,5 +1,4 @@
 const express = require('express')
-const category = require('../../models/category')
 const router = express.Router()
 const Category = require('../../models/category')
 const Record = require('../../models/Record')
@@ -9,18 +8,21 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
-  let data = Object.assign(req.body)
+  let data = req.body
 
   Category.find()
     .lean()
     .then(categories => {
       return categories.find(item => item.name === data.category)
     })
-    .then(categoryicon => {
-      if (data.answer === 'add') {
-        data.icon = categoryicon.icon
-        return Record.create(data)
-      }
+    .then(categories => {
+      return Record.create({
+        name: data.name,
+        category: data.category,
+        date: data.date,
+        amount: data.amount,
+        icon: categories.icon
+      })
     })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
@@ -37,23 +39,21 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  const data = Object.assign(req.body)
+  const data = req.body
 
   Category.find()
-    .then(type => {
-      return type.find(item => item.name === data.category).icon
+    .then(categories => {
+      return categories.find(item => item.name === data.category)
     })
-    .then(type => {
-      if (data.answer === 'add') {
-        data.icon = type
+    .then(categories => {
+      if (data.answer === 'edit') {
         return Record.findById(id)
           .then(spend => {
             spend.name = data.name
             spend.category = data.category
             spend.date = data.date
-            spend.category = data.category
             spend.amount = data.amount
-            spend.icon = data.icon
+            spend.icon = categories.icon
             return spend.save()
           })
       }

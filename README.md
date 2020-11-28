@@ -18,4 +18,6 @@
 
 4. 輸入 npm run dev 執行
 
-5. 執行成功時會顯示 Express is listening on http://localhost:3000
+5. 輸入 npm run seed 可以在自己的資料庫產生類別和消費帳目的資料
+
+6. 執行成功時會顯示 Express is listening on http://localhost:3000
