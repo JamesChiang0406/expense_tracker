@@ -1,42 +1,32 @@
 [
   {
     "name": "早餐",
-    "category": "餐飲食品",
     "date": "2020-06-11",
     "amount": 120,
-    "merchant": "全家便利商店",
     "icon": "fas fa-utensils"
   },
   {
     "name": "電影",
-    "category": "休閒娛樂",
     "date": "2020-06-10",
     "amount": 280,
-    "merchant": "威秀影城",
     "icon": "fas fa-grin-beam"
   },
   {
     "name": "加油",
-    "category": "交通出行",
     "date": "2020-06-05",
     "amount": 280,
-    "merchant": "中油",
     "icon": "fas fa-shuttle-van"
   },
   {
     "name": "房租",
-    "category": "家居物業",
     "date": "2020-05-30",
     "amount": 9800,
-    "merchant": "房東",
     "icon": "fas fa-home"
   },
   {
     "name": "晚餐",
-    "category": "餐飲食品",
     "date": "2020-06-10",
     "amount": 280,
-    "merchant": "麥當勞",
     "icon": "fas fa-utensils"
   }
 ]
