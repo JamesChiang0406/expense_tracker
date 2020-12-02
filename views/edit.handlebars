@@ -27,8 +27,8 @@
 
     <div class="form-group d-flex justify-content-between my-4" style="width: 300px;">
       <label for="formGroupExampleInput">金額：</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" name="amount" value="{{spend.amount}}"
-        style="width: 200px;" required>
+      <input type="text" class="form-control" id="formGroupExampleInput" oninput="value=value.replace(/[^\d]/g,'')"
+        name="amount" value="{{spend.amount}}" style="width: 200px;" required>
     </div>
 
     <button class="btn active text-white border-dark mt-3" type="submit" name="answer" value="edit"
