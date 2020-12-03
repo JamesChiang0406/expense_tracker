@@ -8,10 +8,13 @@ router.get('/new', (req, res) => {
 
 router.post('/new', (req, res) => {
   let data = req.body
+  const int_reg = /^[0-9]*[1-9][0-9]*$/
 
-  return Record.create(data)
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+  if (int_reg.test(data.amount)) {
+    return Record.create(data)
+      .then(() => res.redirect('/'))
+      .catch(error => console.log(error))
+  }
 })
 
 router.get('/:id/edit', (req, res) => {
@@ -25,19 +28,26 @@ router.get('/:id/edit', (req, res) => {
 router.put('/:id', (req, res) => {
   const id = req.params.id
   const data = req.body
+  const int_reg = /^[0-9]*[1-9][0-9]*$/
 
-  Record.findById(id)
-    .then(spend => {
-      if (data.answer === 'edit') {
-        spend.name = data.name
-        spend.date = data.date
-        spend.amount = data.amount
-        spend.icon = data.icon
-        return spend.save()
-      }
-    })
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+  if (int_reg.test(data.amount) && data.answer === 'edit') {
+    Record.findById(id)
+      .then(spend => {
+        if (data.answer === 'edit') {
+          spend.name = data.name
+          spend.date = data.date
+          spend.amount = data.amount
+          spend.icon = data.icon
+          return spend.save()
+        }
+      })
+      .then(() => res.redirect('/'))
+      .catch(error => console.log(error))
+  } else if (data.answer === '/') {
+    res.redirect('/')
+  } else {
+    res.render('edit', { id })
+  }
 })
 
 router.get('/:id/delete', (req, res) => {
