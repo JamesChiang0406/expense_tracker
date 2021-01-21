@@ -1,5 +1,27 @@
 <div class="container d-flex flex-column align-items-start mb-4" style="width: 100%; padding-left: 300px">
-  <div class="d-flex align-items-center justify-content-center mt-4">
+  <div class="d-flex align-items-center justify-content-between mt-4" style="max-width: 550px;">
+    <div class="dropdown" style="width: 250px;">
+      <button class="btn dropdown-toggle border-bottom border-right" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        月份
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/month/all">全部</a>
+        <a class="dropdown-item" href="/month/01">一月</a>
+        <a class="dropdown-item" href="/month/02">二月</a>
+        <a class="dropdown-item" href="/month/03">三月</a>
+        <a class="dropdown-item" href="/month/04">四月</a>
+        <a class="dropdown-item" href="/month/05">五月</a>
+        <a class="dropdown-item" href="/month/06">六月</a>
+        <a class="dropdown-item" href="/month/07">七月</a>
+        <a class="dropdown-item" href="/month/08">八月</a>
+        <a class="dropdown-item" href="/month/09">九月</a>
+        <a class="dropdown-item" href="/month/10">十月</a>
+        <a class="dropdown-item" href="/month/11">十一月</a>
+        <a class="dropdown-item" href="/month/12">十二月</a>
+      </div>
+    </div>
+
     <div class="dropdown" style="width: 250px;">
       <button class="btn dropdown-toggle border-bottom border-right" type="button" id="dropdownMenuButton"
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -14,7 +36,6 @@
         <a class="dropdown-item" href="/records/fas fa-pen">其他</a>
       </div>
     </div>
-
 
     <div class="d-flex align-items-center justify-content-center">
       <a href="/records/new" class="btn btn-sm active text-white border-dark" role="button" aria-pressed="true"
@@ -35,7 +56,10 @@
         <i class="{{this.icon}} mr-2" style="font-size: 25px; color: rgb(176, 202, 250);"></i>
 
         <div class="d-flex flex-column">
-          <small style="font-size: 5mm;">{{this.name}}</small>
+          <small class="text-danger" style="font-size: 6mm;">{{this.name}}
+            <small class="text-dark" style="font-size: 4mm;"> 在 </small>
+            {{this.merchant}}
+          </small>
           <small class="text-muted" style="font-size: 1mm;">{{this.date}}</small>
         </div>
       </div>

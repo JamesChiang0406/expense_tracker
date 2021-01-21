@@ -7,11 +7,12 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
-  let data = req.body
+  let { name, date, icon, merchant, amount } = req.body
   const int_reg = /^[0-9]*[1-9][0-9]*$/
+  const userId = req.user._id
 
-  if (int_reg.test(data.amount)) {
-    return Record.create(data)
+  if (int_reg.test(amount)) {
+    return Record.create({ name, date, icon, amount, merchant, userId })
       .then(() => res.redirect('/'))
       .catch(error => console.log(error))
   }
@@ -19,7 +20,8 @@ router.post('/new', (req, res) => {
 
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
-  Record.findById(id)
+  const userId = req.user._id
+  Record.findOne({ _id: id, userId })
     .lean()
     .then(spend => res.render('edit', { id, spend }))
     .catch(error => console.log(error))
@@ -27,23 +29,25 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  const data = req.body
+  const { name, date, icon, merchant, amount, answer } = req.body
+  const userId = req.user._id
   const int_reg = /^[0-9]*[1-9][0-9]*$/
 
-  if (int_reg.test(data.amount) && data.answer === 'edit') {
-    Record.findById(id)
+  if (int_reg.test(amount) && answer === 'edit') {
+    Record.findOne({ _id: id, userId })
       .then(spend => {
-        if (data.answer === 'edit') {
-          spend.name = data.name
-          spend.date = data.date
-          spend.amount = data.amount
-          spend.icon = data.icon
+        if (answer === 'edit') {
+          spend.name = name
+          spend.date = date
+          spend.amount = amount
+          spend.icon = icon
+          spend.merchant = merchant
           return spend.save()
         }
       })
       .then(() => res.redirect('/'))
       .catch(error => console.log(error))
-  } else if (data.answer === '/') {
+  } else if (answer === '/') {
     res.redirect('/')
   } else {
     res.render('edit', { id })
@@ -52,7 +56,8 @@ router.put('/:id', (req, res) => {
 
 router.get('/:id/delete', (req, res) => {
   const id = req.params.id
-  Record.findById(id)
+  const userId = req.user._id
+  Record.findOne({ _id: id, userId })
     .lean()
     .then(spend => res.render('delete', { id, spend }))
     .catch(error => console.log(error))
@@ -61,7 +66,9 @@ router.get('/:id/delete', (req, res) => {
 router.delete('/:id', (req, res) => {
   const option = req.body.answer
   const id = req.params.id
-  Record.findById(id)
+  const userId = req.user._id
+
+  Record.findOne({ _id: id, userId })
     .then(item => {
       if (option === "delete") {
         return item.remove()
@@ -73,8 +80,9 @@ router.delete('/:id', (req, res) => {
 
 router.get('/:icon', (req, res) => {
   const icon = req.params.icon
+  const userId = req.user._id
 
-  Record.find()
+  Record.find({ userId })
     .lean()
     .then(spends => {
       if (icon === 'all') {
