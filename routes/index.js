@@ -6,7 +6,7 @@ const records = require('./modules/records')
 const users = require('./modules/users')
 
 
-router.use('/records', records)
+router.use('/records', authenticator, records)
 router.use('/users', users)
 router.use('/', authenticator, home)
 
