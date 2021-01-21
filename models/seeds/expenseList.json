@@ -3,30 +3,35 @@
     "name": "早餐",
     "date": "2020-06-11",
     "amount": 120,
-    "icon": "fas fa-utensils"
+    "icon": "fas fa-utensils",
+    "merchant": "美而美早餐店"
   },
   {
     "name": "電影",
     "date": "2020-06-10",
     "amount": 280,
-    "icon": "fas fa-grin-beam"
+    "icon": "fas fa-grin-beam",
+    "merchant": "威秀影城"
   },
   {
     "name": "加油",
     "date": "2020-06-05",
     "amount": 280,
-    "icon": "fas fa-shuttle-van"
+    "icon": "fas fa-shuttle-van",
+    "merchant": "中油"
   },
   {
     "name": "房租",
     "date": "2020-05-30",
     "amount": 9800,
-    "icon": "fas fa-home"
+    "icon": "fas fa-home",
+    "merchant": "住家"
   },
   {
     "name": "晚餐",
     "date": "2020-06-10",
     "amount": 280,
-    "icon": "fas fa-utensils"
+    "icon": "fas fa-utensils",
+    "merchant": "全家便利商店"
   }
 ]
